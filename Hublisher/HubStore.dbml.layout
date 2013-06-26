@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="HubStore">
+  <DataContextMoniker Name="/HubStoreDataContext" />
+  <nestedChildShapes>
+    <classShape Id="56a2220e-8978-4bd1-94f2-fe265ddb8481" absoluteBounds="0.75, 0.75, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/HubStoreDataContext/brand" />
+      <nestedChildShapes>
+        <elementListCompartment Id="5056fea6-8bca-413c-950c-f979235e823c" absoluteBounds="0.765, 1.21, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="49ef78da-0dcd-4526-a7a4-7ee349828e5d" absoluteBounds="4, 2.625, 2, 1.7708968098958331">
+      <DataClassMoniker Name="/HubStoreDataContext/establishment_brand" />
+      <nestedChildShapes>
+        <elementListCompartment Id="2689336b-2161-4c28-bb66-cc8a36c1f646" absoluteBounds="4.015, 3.085, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="9b1e45b5-9a3a-425e-9b7f-baefa830a0d2" absoluteBounds="7, 1.25, 2, 2.3478011067708335">
+      <DataClassMoniker Name="/HubStoreDataContext/establishment" />
+      <nestedChildShapes>
+        <elementListCompartment Id="b623271a-ae66-4768-80aa-1f693a7af2e7" absoluteBounds="7.015, 1.71, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

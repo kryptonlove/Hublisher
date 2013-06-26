@@ -1,0 +1,56 @@
+﻿@model Hublisher.Models.AddPricesModel
+@{
+	ViewBag.Title = "Addprices";
+	Layout = "~/Views/Shared/master.cshtml";
+}
+
+<script type="text/javascript">
+	$(document).ready(function () {
+		$("#name").keydown(function (e) {
+			if (e.shiftKey) e.preventDefault();
+			else {
+				var nKeyCode = e.keyCode;
+				if (nKeyCode == 8 || nKeyCode == 9 || nKeyCode == 190 || nKeyCode == 37 || nKeyCode == 39) return;
+				if (nKeyCode < 95) {
+					if (nKeyCode < 48 || nKeyCode > 57) e.preventDefault();
+				} else {
+					if (nKeyCode < 96 || nKeyCode > 105) e.preventDefault();
+				}
+			}
+		});
+	});
+</script>
+
+<h3>Prices for the @Model.Brand.name at <a href="/beer/addbeers/@Model.Establishment.id">@Model.Establishment.name</a></h3>
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Size</th>
+			<th>Price</th>
+		</tr>
+	</thead>
+	@foreach (var item in Model.EstablishmentBrands) {
+		<tr>
+			<td>@item.size</td>
+			<td>@item.price</td>
+		</tr>
+ }
+</table>
+
+
+<h3>Add a new price for that brew</h3>
+
+<form action="/beer/addprices/@Model.Establishment.id/@Model.Brand.id" method="post" onsubmit="return $(this).validate()">
+	<div class="well">
+		<p>Size (small, large, cl, oz etc.)</p>
+		<input type="text" name="size" class="input-xlarge" data-validation="required" />
+		<p>Price</p>
+		<input type="text" id="name" name="price" class="input-xlarge" data-validation="required" />
+		<br />
+		@Html.AntiForgeryToken()
+		<input type="submit" value="Add!" />
+	</div>
+</form>
+
+<script src="/scripts/jquery.formvalidator.min.js"></script>

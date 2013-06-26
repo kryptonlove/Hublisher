@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="hublisher" Class="HubStoreDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=DANIELDPEDK12\SQLEXPRESS;Initial Catalog=hublisher;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="hublisherConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.brands" Member="brands">
+    <Type Name="brand">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="country" Type="System.String" DbType="NVarChar(64)" CanBeNull="true" />
+      <Column Name="maker" Type="System.String" DbType="NVarChar(64)" CanBeNull="true" />
+      <Column Name="volume" Type="System.String" DbType="NVarChar(32)" CanBeNull="true" />
+      <Column Name="description" Type="System.String" DbType="NVarChar(400)" CanBeNull="true" />
+      <Column Name="type" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.establishment_brands" Member="establishment_brands">
+    <Type Name="establishment_brand">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="establishment_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="brand_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="size" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="price" Type="System.String" DbType="NVarChar(4)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.establishment" Member="establishments">
+    <Type Name="establishment">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="NVarChar(64) NOT NULL" CanBeNull="false" />
+      <Column Name="address" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="country" Type="System.String" DbType="NVarChar(64) NOT NULL" CanBeNull="false" />
+      <Column Name="city" Type="System.String" DbType="NVarChar(64) NOT NULL" CanBeNull="false" />
+      <Column Name="maplink" Type="System.String" DbType="NVarChar(1024)" CanBeNull="true" />
+      <Column Name="borough" Type="System.String" DbType="NVarChar(64)" CanBeNull="true" />
+      <Column Name="type" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>

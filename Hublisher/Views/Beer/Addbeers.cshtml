@@ -1,0 +1,98 @@
+﻿@model Hublisher.Models.AddBeersModel
+@{
+	ViewBag.Title = "Addbeers";
+	Layout = "~/Views/Shared/master.cshtml";
+	var beers = Model.GetEstablishmentBrands();
+}
+
+
+<div id="beeradder" style="display: none;">
+	<h4>
+		@{
+			if (Model.Brand.name != null) {
+			<span>Edit</span>
+			} else {
+			<span>Add</span>
+			}
+		}
+
+		a beer for the selection at @Model.Establishment.name</h4>
+
+
+	<p><a onclick="$('#beeradder').toggle();" href="#">Cancel</a></p>
+
+	<form action="/beer/addbeers/@Model.Establishment.id" method="post" onsubmit="return $(this).validate()">
+		<div class="well">
+			<p>Name of beer </p>
+			<input type="text" autocomplete="off" name="name" class="input-xlarge" data-validation="required" />
+			<div style="display: none;" id="beer_exists">
+				<p>
+					<span class="text-warning">It appears that this beer already exists in the hoplisher system :)
+						<br />
+						You can still save it and add to the menu for @Model.Establishment.name</span>
+				</p>
+			</div>
+			<p>Maker</p>
+			<input type="text" name="maker" class="input-xlarge" data-validation="required" />
+			<input type="hidden" name="brand_id" />
+			<p>Type (IPA, PA, Wheat, Stout etc.)</p>
+			<input type="text" name="type" class="input-xlarge" data-validation="required" />
+			<p>Origin (e.g brewery, country, person, city)</p>
+			<input type="text" name="country" class="input-xlarge" data-validation="required" />
+			<p>Volume (alcohol %)</p>
+			<input type="text" name="volume" class="input-small" data-validation="required" />
+			<p>Taste description</p>
+			<textarea class="input-xlarge" rows="4" name="description" data-validation="required"></textarea>
+			<br />
+			@Html.AntiForgeryToken()
+			<input type="submit" value="Save" class="btn btn-inverse" />
+		</div>
+	</form>
+</div>
+
+<h4>Current beer selection at @Model.Establishment.name</h4>
+
+<p>
+	<a onclick="$('#beeradder').toggle();" href="#">Add a new beer at @Model.Establishment.name</a>
+</p>
+
+
+@if (beers.Count > 0) {
+	<div class="well">
+		@foreach (var item in beers) {
+			<div>
+				<p><a class="label label-info" onclick="$('#@item.id').toggle();" href="#"><strong>@item.name (@item.maker)</strong></a> </p>
+				<p style="display:none;" id="@item.id">@item.description
+					<br />
+					<br />
+					<u><a href="~/Beer/AddPrices/@Model.Establishment.id/@item.id">prices</a></u><br />
+
+
+					@foreach (var price in Model.EstablishmentBrands.Where( x => x.brand_id == item.id )) {
+		 if (!string.IsNullOrEmpty(price.price)) { 
+						<span>@price.size - @string.Format( "{0:C}", double.Parse( price.price ) )</span>
+						<br />
+		 }
+	 }
+
+					<a class="label label-warning" onclick="$('#alert-@item.id').toggle();" href="#"><i class="icon-remove icon-white"></i></a>
+					<span id="alert-@item.id" style="display:none;"><a class="label label-warning" href="/beer/delete/@item.id/@Model.Establishment.id">Are you sure ? as in really SURE ?</a></span>
+				</p>
+			</div>
+  }
+	</div>
+} else {
+	<p>There is no beer!</p>
+}
+
+<hr class="soft" />
+
+<address>
+	<strong><small>@Model.Establishment.name</small></strong><br />
+	<small>@Model.Establishment.address.Split( ',' ).ToArray().First()</small>
+	<br />
+	<small>@Model.Establishment.city | <a target="_blank" href="@Model.Establishment.maplink">( map )</a></small>
+</address>
+
+<script src="/scripts/addbeers.js"></script>
+<script src="/scripts/jquery.formvalidator.min.js"></script>

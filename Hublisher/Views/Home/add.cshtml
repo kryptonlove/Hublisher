@@ -1,0 +1,139 @@
+﻿@{
+	ViewBag.Title = "Add Beer Place!";
+	Layout = "~/Views/Shared/master.cshtml";
+}
+
+<script>
+	function setDefaultCity() {
+		var cityName = localStorage.getItem("defaultcity");
+
+		if (cityName != null) {
+			$("input[name=default_city]").attr("checked", "checked");
+		}
+
+		$("input[name=searchcity]").val(cityName);
+	}
+
+	$(function () {
+		setDefaultCity();
+
+		$('input[name="searchcity"]').keypress(function () {
+			$('input[name = "default_city"]').prop('checked', false);
+		})
+
+		$('input[name="default_city"]').change(function () {
+			if (this.checked) {
+				var cityName = $("input[name=searchcity]").val();
+
+				localStorage.setItem("defaultcity", cityName);
+			} else {
+				localStorage.removeItem("defaultcity");
+			}
+		});
+
+
+		$("#typeahead").autocomplete({
+			delay: 100,
+
+			source: function (request, response) {
+				$.ajax({
+					url: '/search/places/' + $("input[name=searchcity]").val() + '/' + request.term,
+					dataType: "json",
+					success: function (data) {
+						if (data.length === 0) {
+							$("input[name=hidden_id]").val("")
+							return {
+								label: '',
+								value: ''
+							}
+						}
+
+						response($.map(data, function (item) {
+							var bor = item.borough || "";
+							$("input[name=hidden_id]").val(item.id)
+
+							return {
+								label: item.name + bor,
+								value: item.name
+							}
+						}));
+					},
+					error: function (request) {
+						alert(request);
+					}
+				});
+			},
+			minLength: 2,
+			open: function () {
+				$(this).removeClass("ui-corner-all").addClass("ui-corner-top");
+			},
+			close: function () {
+				$(this).removeClass("ui-corner-top").addClass("ui-corner-all");
+			}
+		});
+
+	});
+
+</script>
+
+
+
+<h2>Search and Enjoy
+</h2>
+
+<div>
+	<div id="placeadder" style="display: none;">
+
+		<p><a onclick="$('#placeadder').toggle();" href="#">Cancel</a></p>
+
+		<form action="/home/add" method="post" onsubmit="return $(this).validate()">
+			<div class="well">
+				<h4>Add a new Beer Place!</h4>
+
+
+				<p>Name</p>
+				<input type="text" name="name" class="input-xlarge" data-validation="required" />
+				<p>Address</p>
+				<textarea class="input-xlarge" rows="4" name="address" data-validation="required"></textarea>
+				<p>Borough (williamsburg, east-river london, norrebro etc.)</p>
+				<input type="text" name="borough" class="input-xlarge" data-validation="required" />
+				<p>City</p>
+				<input type="text" name="city" class="input-xlarge" data-validation="required" />
+				<p>Country</p>
+				<select name="country" class="input-medium bfh-countries">
+					<option value="Denmark">Denmark</option>
+					<option value="Sweden">Sweden</option>
+					<option value="Norway">Norway</option>
+					<option value="UK">UK</option>
+					<option value="USA">USA</option>
+				</select>
+				<br />
+				@Html.AntiForgeryToken()
+				<input type="submit" class="btn btn-info" value="Add!" />
+			</div>
+		</form>
+
+	</div>
+
+	<p><a onclick="$('#placeadder').toggle();" href="#">Do you know a place where they sell good beer?</a></p>
+
+
+	<div class="well">
+		<h3>Find me a good place to have a beer</h3>
+
+		<form method="post" action="/search/places">
+			<p>In which city ? (copenhagen, hamburg, munich, london etc.)</p>
+			<input type="text" name="searchcity" class="input-xlarge" />
+			<input type="hidden" name="hidden_id" />
+			<input type="checkbox" class="checkbox" name="default_city" />
+			<span>(default city ?)</span>
+			<p>Where would you like to enjoy your beer ? (redmond, copenhagen, timboktoo etc.)</p>
+			<input type="text" name="placename" class="input-xlarge" id="typeahead" />
+			<br />
+			<input type="submit" class="btn btn-info" value="GO!" />
+		</form>
+	</div>
+
+</div>
+
+<script src="/scripts/jquery.formvalidator.min.js"></script>
