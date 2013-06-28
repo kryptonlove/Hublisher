@@ -10,7 +10,7 @@ namespace Hublisher.Tests
 {
 	public static class DatabaseConnection
 	{
-		private static string fileDir = @"C:\backup\Backup\Code\Hublisher\Hublisher\";
+		private static string fileDir = @"C:\Users\danielmf\Documents\backup\Backup\Code\Hublisher\Hublisher\";
 
 		public static string GetTestConnection(bool release) {
 			if (release) { fileDir = fileDir + "Web.Release.config"; } 

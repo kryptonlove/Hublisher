@@ -13,7 +13,8 @@ namespace Hublisher.Services.Beer
 		bool Exists( string name );
 		bool Exists( int beerId, int establishmentId );
 		brand AddBeer( brand beer, int establishmentId );
-		AddBeersModel GetBeer( int establistmentId, int beerId );
+		AddBeersModel GetEstablishment( int establistmentId, int beerId = 0);
+		AddBeersModel GetEstablishment( string establishmentName );
 		AddPricesModel GetPrices( int establistmentId, int beerId );
 		int AddPrices( establishment_brand model, int establistmentId, int beerId );
 	}

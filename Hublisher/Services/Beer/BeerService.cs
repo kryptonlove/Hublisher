@@ -10,6 +10,18 @@ namespace Hublisher.Services.Beer
 	{
 		public HubStoreDataContext Database { get; set; }
 
+		public BeerService() {
+
+		}
+
+		public AddBeersModel GetEstablishment( string name ) {
+			var model = new AddBeersModel();
+
+			var place = Database.establishments.Where( x => x.name == name ).FirstOrDefault();
+
+			return GetEstablishment( place.id );
+		}
+
 		public AddPricesModel GetPrices( int establishmentId, int beerId ) {
 			var model = new AddPricesModel();
 
@@ -42,7 +54,7 @@ namespace Hublisher.Services.Beer
 			}
 		}
 
-		public AddBeersModel GetBeer( int establistmentId, int beerId ) {
+		public AddBeersModel GetEstablishment( int establistmentId, int beerId = 0) {
 			var model = new AddBeersModel();
 
 			model.Establishment = Database.establishments.Where( x => x.id == establistmentId ).FirstOrDefault();

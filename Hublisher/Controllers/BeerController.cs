@@ -9,22 +9,33 @@ using System.Web.Mvc;
 namespace Hublisher.Controllers
 {
 	public class BeerController : BaseController
-	{
+	{	
 		public BeerController( IBeerService beerService ) {
+			beerService.Database = base.database;
+			_beerService = beerService;
+		}
+
+		public BeerController(IBeerService beerService, string connection) : base(connection) {
 			beerService.Database = base.database;
 			_beerService = beerService;
 		}
 
 		public IBeerService _beerService;
 
-		public ActionResult AddBeers( int id, [Bind( Prefix = "eid" )] int? beerId ) {
+		public ActionResult AddBeers( [Bind( Prefix = "id" )] string establishmentId, [Bind( Prefix = "eid" )] int? beerId ) {
 			var beerIdValue = 0;
 			if (beerId != null)
 				beerIdValue = beerId.Value;
 
-			var model = _beerService.GetBeer( id, beerIdValue );
+			var model = _beerService.GetEstablishment( int.Parse( establishmentId ), beerIdValue );
 
 			return View( model );
+		}
+
+		public ActionResult GetEstablishment( string placeName ) {
+			var model = _beerService.GetEstablishment( placeName );
+
+			return View( "AddBeers", model );
 		}
 
 		[HttpPost()]
