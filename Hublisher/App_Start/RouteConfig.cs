@@ -37,7 +37,6 @@ namespace Hublisher
 				constraints: new { query = new CityConstraint() }
 			);
 
-
 			routes.MapRoute(
 				name: "Default2",
 				url: "{controller}/{action}/{id}/{eid}",

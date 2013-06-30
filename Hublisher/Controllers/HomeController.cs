@@ -9,9 +9,9 @@ namespace Hublisher.Controllers
     public class HomeController : BaseController
     {
 		[HttpGet()]
-        public ActionResult Add()
+        public ActionResult Add(string id)
         {
-            return View();
+			return View();
         }
 
 		[HttpPost()]
