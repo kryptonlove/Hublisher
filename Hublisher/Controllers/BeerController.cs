@@ -9,18 +9,12 @@ using System.Web.Mvc;
 namespace Hublisher.Controllers
 {
 	public class BeerController : BaseController
-	{	
-		public BeerController( IBeerService beerService ) {
-			beerService.Database = base.database;
-			_beerService = beerService;
-		}
-
-		public BeerController(IBeerService beerService, string connection) : base(connection) {
-			beerService.Database = base.database;
-			_beerService = beerService;
-		}
-
+	{
 		public IBeerService _beerService;
+
+		public BeerController( IBeerService beerService ) {
+			_beerService = beerService;
+		}
 
 		public ActionResult AddBeers( [Bind( Prefix = "id" )] string establishmentId, [Bind( Prefix = "eid" )] int? beerId ) {
 			var beerIdValue = 0;

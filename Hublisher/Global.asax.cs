@@ -39,10 +39,6 @@ namespace Hublisher
 		}
 
 
-		public static void UpdateGlobals( string connection ) {
-			_connection = connection;
-			UpdateGlobals();
-		}
 
 		private static string _connection;
 		public static void UpdateGlobals() {

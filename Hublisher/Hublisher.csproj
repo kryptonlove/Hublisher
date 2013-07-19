@@ -167,6 +167,7 @@
     <Compile Include="Services\Beer\BeerModule.cs" />
     <Compile Include="Services\Beer\BeerService.cs" />
     <Compile Include="Services\Beer\IBeerService.cs" />
+    <Compile Include="Services\ServiceBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -219,6 +220,7 @@
     <None Include="Web.Release.config.copy" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Services\Establishment\" />
     <Folder Include="Views\Search\" />
   </ItemGroup>
   <ItemGroup>

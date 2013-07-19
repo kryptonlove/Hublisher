@@ -6,14 +6,8 @@ using System.Web;
 
 namespace Hublisher.Services.Beer
 {
-	public class BeerService : IBeerService
+	public class BeerService : ServiceBase, IBeerService
 	{
-		public HubStoreDataContext Database { get; set; }
-
-		public BeerService() {
-
-		}
-
 		public AddBeersModel GetEstablishment( string name ) {
 			var model = new AddBeersModel();
 

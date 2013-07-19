@@ -17,14 +17,12 @@ namespace Hublisher.Tests
 	{
 		BeerController controller;
 		public BeerControllerTests() {
-			controller = new BeerController( new BeerService(), connection );
+			controller = new BeerController( new BeerService() );
 		}
-
-		static string connection = DatabaseConnection.GetTestConnection( false );
 
 		[ClassInitialize]
 		public static void Init( TestContext context ) {
-			HublisherApp.UpdateGlobals( connection );
+			HublisherApp.UpdateGlobals();
 		}
 
 		[TestMethod]

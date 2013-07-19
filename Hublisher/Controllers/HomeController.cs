@@ -19,8 +19,8 @@ namespace Hublisher.Controllers
 		public ActionResult Add(establishment est) {
 			if (HublisherApp._allEstablishments.Where(e => e.name == est.name && e.city == est.city).Count() == 0)
 			{
-				database.establishments.InsertOnSubmit(est);
-				database.SubmitChanges();
+				//database.establishments.InsertOnSubmit(est);
+				//database.SubmitChanges();
 
 				HublisherApp.UpdateGlobals();
 			}
