@@ -1,2 +1,2 @@
-hoplisher
+Hublisher - for beer lovers
 =========
