@@ -1,4 +1,4 @@
-﻿@model Hublisher.Models.AddBeersModel
+﻿@model Hublisher.Models.MenuModel
 @{
 	ViewBag.Title = "Addbeers";
 	Layout = "~/Views/Shared/master.cshtml";
@@ -21,7 +21,7 @@
 
 	<p><a onclick="$('#beeradder').toggle();" href="#">Cancel</a></p>
 
-	<form action="/beer/addbeers/@Model.Establishment.id" method="post" onsubmit="return $(this).validate()">
+	<form action="/est/menu/@Model.Establishment.id" method="post" onsubmit="return $(this).validate()">
 		<div class="well">
 			<p>Name of beer </p>
 			<input type="text" autocomplete="off" name="name" class="input-xlarge" data-validation="required" />
@@ -29,7 +29,7 @@
 				<p>
 					<span class="text-warning">It appears that this beer already exists in the hoplisher system :)
 						<br />
-						You can still save it and add to the menu for @Model.Establishment.name</span>
+						Don't worry, you can still save it and add it to the menu for @Model.Establishment.name</span>
 				</p>
 			</div>
 			<p>Maker</p>
@@ -51,6 +51,7 @@
 </div>
 
 <h4>Current beer selection at @Model.Establishment.name</h4>
+<h5>- Is this your bar ?</h5>
 
 <p>
 	<a onclick="$('#beeradder').toggle();" href="#">Add a new beer at @Model.Establishment.name</a>
@@ -65,7 +66,7 @@
 				<p style="display:none;" id="@item.id">@item.description
 					<br />
 					<br />
-					<u><a href="~/Beer/AddPrices/@Model.Establishment.id/@item.id">prices</a></u><br />
+					<u><a href="~/Est/AddPrices/@Model.Establishment.id/@item.id">prices</a></u><br />
 
 
 					@foreach (var price in Model.EstablishmentBrands.Where( x => x.brand_id == item.id )) {
@@ -76,7 +77,9 @@
 	 }
 
 					<a class="label label-warning" onclick="$('#alert-@item.id').toggle();" href="#"><i class="icon-remove icon-white"></i></a>
-					<span id="alert-@item.id" style="display:none;"><a class="label label-warning" href="/beer/delete/@item.id/@Model.Establishment.id">Are you sure ? as in really SURE ?</a></span>
+					<span id="alert-@item.id" style="display:none;">
+						<a class="label label-warning" href="/est/delete/@item.id/@Model.Establishment.id">Are you sure ? as in really SURE ?</a>
+					</span>
 				</p>
 			</div>
   }

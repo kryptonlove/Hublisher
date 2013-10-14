@@ -48,8 +48,8 @@ namespace Hublisher
 			
 			HubStoreDataContext database = new HubStoreDataContext( _connection );
 
-			_allBrands = database.brands.ToList();
-			_allEstablishments = database.establishments.ToList();
+			_allBrands = database.brands.Where(b=>b.deleted == false).ToList();
+			_allEstablishments = database.establishments.Where(e=>e.deleted == false).ToList();
 		}
 
 		public static List<establishment> _allEstablishments;

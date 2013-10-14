@@ -9,15 +9,23 @@
       <Column Name="volume" Type="System.String" DbType="NVarChar(32)" CanBeNull="true" />
       <Column Name="description" Type="System.String" DbType="NVarChar(400)" CanBeNull="true" />
       <Column Name="type" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="createdby" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="updatedby" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="updated" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="created" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="deleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
     </Type>
   </Table>
-  <Table Name="dbo.establishment_brands" Member="establishment_brands">
-    <Type Name="establishment_brand">
+  <Table Name="dbo.users" Member="users">
+    <Type Name="user">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="establishment_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="brand_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="size" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
-      <Column Name="price" Type="System.String" DbType="NVarChar(4)" CanBeNull="true" />
+      <Column Name="created" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="updated" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="logins" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="email" Type="System.String" DbType="VarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="alias" Type="System.String" DbType="VarChar(42)" CanBeNull="true" />
+      <Column Name="password" Type="System.String" DbType="VarChar(512) NOT NULL" CanBeNull="false" />
+      <Column Name="administrator" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
   <Table Name="dbo.establishment" Member="establishments">
@@ -30,6 +38,20 @@
       <Column Name="maplink" Type="System.String" DbType="NVarChar(1024)" CanBeNull="true" />
       <Column Name="borough" Type="System.String" DbType="NVarChar(64)" CanBeNull="true" />
       <Column Name="type" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="userid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="deleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.establishment_brands" Member="establishment_brands">
+    <Type Name="establishment_brand">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="establishment_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="brand_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="size" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="price" Type="System.String" DbType="NVarChar(4)" CanBeNull="true" />
+      <Column Name="updatedby" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="createdby" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="deleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
     </Type>
   </Table>
 </Database>

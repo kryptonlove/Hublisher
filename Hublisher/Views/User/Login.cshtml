@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/master.cshtml";
+}
+
+<h2>Login</h2>
+
+<section class="well">
+	<form action="/user/login" method="post" onsubmit="return $(this).validate()">
+		<p>Email</p>
+		<input type="text" name="email" data-validation="email" />
+		<p>Password</p>
+		<input type="password" name="password" data-validation="required" />
+		<br />
+		@Html.AntiForgeryToken()
+		<input class="btn btn-info" type="Submit" value="Login!" />
+	</form>
+</section>
+
+<script src="/scripts/jquery.formvalidator.min.js"></script>

@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Hublisher.Models
 {
-	public class AddBeersModel
+	public class MenuModel
 	{
 		public establishment Establishment { get; set; }
 		public List<establishment_brand> EstablishmentBrands { get; set; }
@@ -16,8 +16,8 @@ namespace Hublisher.Models
 
 			List<brand> list = new List<brand>();
 
-			foreach (var item in db.establishment_brands.Where( x => x.establishment_id == Establishment.id ).ToList()) {
-				list.Add( HublisherApp._allBrands.Where( x => x.id == item.brand_id ).FirstOrDefault() );
+			foreach (var item in db.establishment_brands.Where( x => x.establishment_id == Establishment.id && x.deleted == false ).ToList()) {
+				list.Add( HublisherApp._allBrands.Where( x => x.id == item.brand_id && x.deleted == false ).FirstOrDefault() );
 			}
 
 			return list.Distinct().ToList();

@@ -21,7 +21,7 @@
 	});
 </script>
 
-<h3>Prices for the @Model.Brand.name at <a href="/beer/addbeers/@Model.Establishment.id">@Model.Establishment.name</a></h3>
+<h3>Prices for the @Model.Brand.name at <a href="/est/menu/@Model.Establishment.id">@Model.Establishment.name</a></h3>
 
 <table class="table table-striped">
 	<thead>
@@ -41,7 +41,7 @@
 
 <h3>Add a new price for that brew</h3>
 
-<form action="/beer/addprices/@Model.Establishment.id/@Model.Brand.id" method="post" onsubmit="return $(this).validate()">
+<form action="/est/addprices/@Model.Establishment.id/@Model.Brand.id" method="post" onsubmit="return $(this).validate()">
 	<div class="well">
 		<p>Size (small, large, cl, oz etc.)</p>
 		<input type="text" name="size" class="input-xlarge" data-validation="required" />

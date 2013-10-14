@@ -147,9 +147,10 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="Controllers\BaseController.cs" />
-    <Compile Include="Controllers\BeerController.cs" />
+    <Compile Include="Controllers\EstController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -163,11 +164,23 @@
     </Compile>
     <Compile Include="Models\AddPrices.cs" />
     <Compile Include="Models\AddBeers.cs" />
+    <Compile Include="Models\BarSearch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Beer\BeerModule.cs" />
     <Compile Include="Services\Beer\BeerService.cs" />
     <Compile Include="Services\Beer\IBeerService.cs" />
+    <Compile Include="Services\Establishment\EstablishmentModule.cs" />
+    <Compile Include="Services\Establishment\EstablishmentService.cs" />
+    <Compile Include="Services\Establishment\IEstablishmentService.cs" />
+    <Compile Include="Services\IServiceBase.cs" />
+    <Compile Include="Services\Search\ISearchService.cs" />
+    <Compile Include="Services\Search\SearchModule.cs" />
+    <Compile Include="Services\Search\SearchService.cs" />
     <Compile Include="Services\ServiceBase.cs" />
+    <Compile Include="Services\User\IUserService.cs" />
+    <Compile Include="Services\User\PasswordHash.cs" />
+    <Compile Include="Services\User\UserModule.cs" />
+    <Compile Include="Services\User\UserService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -180,10 +193,13 @@
     <Content Include="Content\images\glyphicons-halflings-white.png" />
     <Content Include="Content\images\glyphicons-halflings.png" />
     <Content Include="Content\images\hoplisherlogo.png" />
+    <Content Include="Content\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\images\ui-bg_glass_75_dadada_1x400.png" />
     <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\validestyle.css" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\addbeers.js" />
+    <Content Include="Scripts\analytics.js" />
     <Content Include="Scripts\formvalidator.jquery.json" />
     <Content Include="HubStore.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
@@ -196,6 +212,7 @@
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\home\Add.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
     <Content Include="Scripts\jquery-ui.js" />
@@ -215,14 +232,13 @@
     <Content Include="Scripts\jquery-1.9.1.min.map" />
     <Content Include="Views\Shared\master.cshtml" />
     <Content Include="Views\Home\add.cshtml" />
-    <Content Include="Views\Beer\Addbeers.cshtml" />
-    <Content Include="Views\Beer\AddPrices.cshtml" />
+    <Content Include="Views\Est\Menu.cshtml" />
+    <Content Include="Views\Est\AddPrices.cshtml" />
+    <Content Include="Views\Search\barsearch.cshtml" />
+    <Content Include="Views\User\Login.cshtml" />
     <None Include="Web.Release.config.copy" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Services\Establishment\" />
-    <Folder Include="Views\Search\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>

@@ -7,15 +7,13 @@ using System.Threading.Tasks;
 
 namespace Hublisher.Services.Beer
 {
-	public interface IBeerService
+	public interface IBeerService : IServiceBase
 	{
-		HubStoreDataContext Database { get; set; }
 		bool Exists( string name );
 		bool Exists( int beerId, int establishmentId );
 		brand AddBeer( brand beer, int establishmentId );
-		AddBeersModel GetEstablishment( int establistmentId, int beerId = 0);
-		AddBeersModel GetEstablishment( string establishmentName );
 		AddPricesModel GetPrices( int establistmentId, int beerId );
 		int AddPrices( establishment_brand model, int establistmentId, int beerId );
+		brand GetBeer( int beerId );
 	}
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hublisher.Services.Establishment;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +9,11 @@ namespace Hublisher.Controllers
 {
     public class HomeController : BaseController
     {
+		private readonly IEstablishmentService _establishment;
+		public HomeController(IEstablishmentService establishment) {
+			_establishment = establishment;
+		}
+		
 		[HttpGet()]
         public ActionResult Add(string id)
         {
@@ -17,19 +23,25 @@ namespace Hublisher.Controllers
 		[HttpPost()]
 		[ValidateAntiForgeryToken()]
 		public ActionResult Add(establishment est) {
-			if (HublisherApp._allEstablishments.Where(e => e.name == est.name && e.city == est.city).Count() == 0)
+			if (HublisherApp._allEstablishments.Where(e => e.name == est.name && e.city == est.city && e.deleted == false).Count() == 0)
 			{
-				//database.establishments.InsertOnSubmit(est);
-				//database.SubmitChanges();
-
-				HublisherApp.UpdateGlobals();
+				est.deleted = false;
+				//est.userid = need one
+				_establishment.AddEstablishment( est );
 			}
 
-			est = HublisherApp._allEstablishments.Where(e => e.name.Equals(est.name, StringComparison.OrdinalIgnoreCase) && e.city.Equals(est.city, StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
+			est = HublisherApp._allEstablishments.Where(e => e.name.Equals(est.name, StringComparison.OrdinalIgnoreCase) && e.city.Equals(est.city, StringComparison.OrdinalIgnoreCase) && e.deleted == false).FirstOrDefault();
 
-			return RedirectToAction("addbeers", "beer", new { id = est.id });
+			return RedirectToAction("menu", "est", new { id = est.id });
 		}
 
-
-    }
+		public ActionResult Get( string identifier ) {
+			int p;
+			if( int.TryParse( identifier, out p ) ) {
+				return View( _establishment.GetById( p ) );
+			} else {
+				return View( _establishment.GetByName( identifier ) );
+			}
+		}
+	}
 }

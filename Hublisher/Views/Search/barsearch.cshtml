@@ -1,0 +1,21 @@
+﻿@model Hublisher.Models.BarSearchModel
+@{
+    ViewBag.Title = "barsearch";
+    Layout = "~/Views/Shared/master.cshtml";
+}
+
+<h2>You entered <u>@ViewContext.RouteData.Values["id"]</u> and then we found this for you</h2>
+
+<br />
+
+@foreach( var bar in Model.Establishments.OrderBy(o => o.name) ) {
+<address>
+	<strong><small>@Html.ActionLink( bar.name, "menu", "est", new { id=bar.id }, null )</small></strong><br />
+	<small>@bar.address.Split( ',' ).ToArray().First()</small>
+	<br />
+	<small>@bar.city | <a target="_blank" href="@bar.maplink">( map )</a></small>
+</address>
+	<hr />	
+}
+
+<p class="well">If you cannot find your favourite place, you can always <a href="/">go ahead and create it</a>.</p>

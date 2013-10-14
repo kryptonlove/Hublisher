@@ -29,5 +29,9 @@ namespace Hublisher.Services
 		}
 
 		public HubStoreDataContext Database { get; set; }
+
+		protected void UpdateApp() {
+			HublisherApp.UpdateGlobals();
+		}
 	}
 }

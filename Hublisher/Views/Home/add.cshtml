@@ -1,81 +1,19 @@
 ﻿@{
 	ViewBag.Title = "Add Beer Place!";
 	Layout = "~/Views/Shared/master.cshtml";
+	Hublisher.user _user = (Hublisher.user) ViewBag.User;
+	var loggedIn = _user != null;
 }
 
-<script>
-	function setDefaultCity() {
-		var cityName = localStorage.getItem("defaultcity");
-
-		//if (cityName != null) {
-		//	$("input[name=default_city]").attr("checked", "checked");
-		//}
-
-		$("input[name=searchcity]").val(cityName);
-	}
-
-	$(function () {
-		setDefaultCity();
-
-		//$('input[name="searchcity"]').keypress(function () {
-		//	$('input[name = "default_city"]').prop('checked', false);
-		//})
-
-		$('input[name="searchcity"]').blur(function () {
-			var cityName = $("input[name=searchcity]").val();
-
-			localStorage.setItem("defaultcity", cityName);
-		});
+<script src="~/Scripts/home/Add.js"></script>
 
 
-		$("#typeahead").autocomplete({
-			delay: 100,
+@if(loggedIn){
+	<h2>Hi @_user.alias, Search and Enjoy</h2>
+} else{
+	<h2>Search and Enjoy</h2>
+}
 
-			source: function (request, response) {
-				$.ajax({
-					url: '/search/places/' + $("input[name=searchcity]").val() + '/' + request.term,
-					dataType: "json",
-					success: function (data) {
-						if (data.length === 0) {
-							$("input[name=hidden_id]").val("")
-							return {
-								label: '',
-								value: ''
-							}
-						}
-
-						response($.map(data, function (item) {
-							var bor = item.borough || "";
-							$("input[name=hidden_id]").val(item.id)
-
-							return {
-								label: item.name + bor,
-								value: item.name
-							}
-						}));
-					},
-					error: function (request) {
-						alert(request);
-					}
-				});
-			},
-			minLength: 2,
-			open: function () {
-				$(this).removeClass("ui-corner-all").addClass("ui-corner-top");
-			},
-			close: function () {
-				$(this).removeClass("ui-corner-top").addClass("ui-corner-all");
-			}
-		});
-
-	});
-
-</script>
-
-
-
-<h2>Search and Enjoy
-</h2>
 
 <div>
 	<div id="placeadder" style="display: none;">
@@ -89,6 +27,13 @@
 
 				<p>Name</p>
 				<input type="text" name="name" class="input-xlarge" data-validation="required" />
+				<p>Type of place</p>
+				<select name="type" class="input-medium bfh-countries">
+					<option value="grocery store">Supermarket</option>
+					<option value="bar">Bar/Café</option>
+					<option value="restaurant">Restaurant</option>
+					<option value="bottle shop">Bottle shop</option>
+				</select>
 				<p>Address</p>
 				<textarea class="input-xlarge" rows="4" name="address" data-validation="required"></textarea>
 				<p>Borough (williamsburg, east-river london, norrebro etc.)</p>
@@ -119,11 +64,9 @@
 
 		<form method="post" action="/search/places">
 			<p>In which city ? (copenhagen, hamburg, munich, london etc.)</p>
-			<input type="text" name="searchcity" class="input-xlarge" />
+			<input type="text" name="searchcity" class="input-xlarge" id="cities" />
 			<input type="hidden" name="hidden_id" />
-			@*<input type="checkbox" class="checkbox" name="default_city" />*@
-			@*<span>(default city ?)</span>*@
-			<p>Where would you like to enjoy your beer ? (redmond, copenhagen, timboktoo etc.)</p>
+			<p>Try typing the name of the place, if you know it.</p>
 			<input type="text" name="placename" class="input-xlarge" id="typeahead" />
 			<br />
 			<input type="submit" class="btn btn-info" value="GO!" />
